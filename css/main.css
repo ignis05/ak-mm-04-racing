@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+#controls {
+    padding-top: 5px;
+    border: 2px solid black;
+    width: 800px;
+    height: 100px;
+    margin: 10px auto;
+}
+
+#canvas {
+    border: 1px solid black;
+}
+
+#keybinds {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+#keybinds input {
+    width: 60px;
+    height: 30px;
+    text-align: center;
+}
+
+#mainsettings {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
