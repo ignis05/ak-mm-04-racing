@@ -12,8 +12,10 @@ class Player {
         this.color = color
     }
     updatePos() {
-        this.posX += this.velocity * Math.sin(this.direction)
-        this.posY += this.velocity * Math.cos(this.direction)
+        if (this.checkCollision()) {
+            this.posX += this.velocity * Math.sin(this.direction)
+            this.posY += this.velocity * Math.cos(this.direction)
+        }
         this.trail.push({ x: this.posX, y: this.posY })
         if (this.trail.length > 500) this.trail.shift()
     }
@@ -34,5 +36,26 @@ class Player {
             this.ctx.fillStyle = this.color + hexString
             this.ctx.fillRect(cords.x - 5, cords.y - 5, 10, 10);
         })
+    }
+    checkCollision() {
+        // 800 x 400
+        // rightTurn (600, 200)
+        // leftTurn (200, 200)
+        //radius = <67, 200>
+        let x = this.posX
+        let y = this.posY
+        let distFromRight = Math.sqrt(((600 - x) * (600 - x)) + ((200 - y) * (200 - y)))
+        let distFromLeft = Math.sqrt(((200 - x) * (200 - x)) + ((200 - y) * (200 - y)))
+        if ((y > 0 && y < 135) || (y > 270 && y < 400)) {// on straight path
+            if (x > 200 && x < 600) { // not on turn
+                // console.log("straight");
+                return true
+            }
+        }
+        if ((x >= 600 || x <= 200) && ((distFromRight > 67 && distFromRight < 200) || (distFromLeft > 67 && distFromLeft < 200))) { // on turn
+            // console.log("turn");
+            return true
+        }
+        return false
     }
 }

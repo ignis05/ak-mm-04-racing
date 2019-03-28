@@ -3,7 +3,7 @@ class Canvas {
         this.settings = settings
         this.canvas = canvas
         this.ctx = canvas.getContext('2d');
-        this.radius = (this.canvas.height / 2) - (this.ctx.lineWidth / 2)
+        this.radius = (this.canvas.height / 2)
         this.players = new Array()
         this.addListeners()
         this.render()
