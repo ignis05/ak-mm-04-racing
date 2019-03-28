@@ -107,7 +107,7 @@ class Canvas {
         console.log("starting game");
         for (let i = 0; i < this.settings.players; i++) {
             console.log("adding player");
-            let player = new Player(300, 300 + (i * 20), this.ctx, colors.shift())
+            let player = new Player(300, 300 + (i * 20), this.ctx, colors.shift(), this.settings.speed, this.settings.turn)
             this.players.push(player)
         }
     }

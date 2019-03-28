@@ -13,6 +13,10 @@ class Controls {
         set.id = "mainsettings"
         this.DOMElement.appendChild(set)
 
+        this.keybindsDiv = document.createElement("div")
+        this.keybindsDiv.id = "keybinds"
+        this.DOMElement.appendChild(this.keybindsDiv)
+
         let label = document.createElement("label")
         label.innerText = "Players:"
         set.appendChild(label)
@@ -26,6 +30,12 @@ class Controls {
         }
         label.appendChild(this.select)
         this.select.style.marginLeft = "10px"
+        this.select.addEventListener("change", () => {
+            let nr = this.select.value
+            this.settings.players = nr
+            console.log(`changed players to ${nr}`);
+            this.showKeybinders(nr)
+        })
 
         let label2 = document.createElement("label")
         label2.innerText = "Rounds:"
@@ -45,20 +55,46 @@ class Controls {
             console.log(`changed rounds to ${nr}`);
         })
 
-        this.keybindsDiv = document.createElement("div")
-        this.keybindsDiv.id = "keybinds"
-        this.DOMElement.appendChild(this.keybindsDiv)
+        let label3 = document.createElement("label")
+        label3.innerText = "Speed:"
+        set.appendChild(label3)
+        var select3 = document.createElement("input")
+        select3.type = "number"
+        select3.max = 5
+        select3.min = 0.5
+        select3.step = 0.5
+        select3.value = 2
+        this.settings.speed = select3.value
+        label3.appendChild(select3)
+        select3.style.marginLeft = "10px"
+        select3.addEventListener("change", () => {
+            let nr = select3.value
+            this.settings.speed = nr
+            console.log(`changed speed to ${nr}`);
+        })
 
-        this.select.addEventListener("change", () => {
-            let nr = this.select.value
-            this.settings.players = nr
-            console.log(`changed players to ${nr}`);
-            this.showKeybinders(nr)
+        let label4 = document.createElement("label")
+        label4.innerText = "Maneuverability:"
+        set.appendChild(label4)
+        var select4 = document.createElement("input")
+        select4.type = "number"
+        select4.max = 10
+        select4.min = 1
+        select4.step = 1
+        select4.value = 5
+        this.settings.turn = select4.value / 100
+        label4.appendChild(select4)
+        select4.style.marginLeft = "10px"
+        select4.addEventListener("change", () => {
+            let nr = select4.value
+            this.settings.turn = nr / 100
+            console.log(`changed speed to ${nr}`);
         })
 
         let start = document.createElement("button")
         start.id = "btStart"
         start.innerHTML = "START"
+        start.style.padding = "5px"
         start.addEventListener("click", () => {
             let ok = true
             for (let i = 1; i <= this.settings.players; i++) {

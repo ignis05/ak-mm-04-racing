@@ -1,8 +1,11 @@
 class Player {
-    constructor(startposX, startposY, ctx, color) {
+    constructor(startposX, startposY, ctx, color, velociy, turning) {
+        console.log("vel= ", velociy);
+        console.log("turn= ", turning);
         this.posX = startposX
         this.posY = startposY
-        this.velocity = 2
+        this.velocity = velociy
+        this.turning = turning
         this.direction = Math.PI / 2
         this.ctx = ctx
         this.trail = new Array()
@@ -12,9 +15,10 @@ class Player {
         this.posX += this.velocity * Math.sin(this.direction)
         this.posY += this.velocity * Math.cos(this.direction)
         this.trail.push({ x: this.posX, y: this.posY })
+        if (this.trail.length > 500) this.trail.shift()
     }
     turn() {
-        this.direction += 0.05
+        this.direction += this.turning
     }
     draw() {
         this.ctx.fillStyle = this.color
@@ -26,7 +30,7 @@ class Player {
         trailrev.forEach((cords, index) => {
             let opacity = 255 - index
             if (opacity < 0) opacity = 0
-            let hexString = opacity.toString(16);
+            let hexString = (~~(opacity / 3)).toString(16);
             this.ctx.fillStyle = this.color + hexString
             this.ctx.fillRect(cords.x - 5, cords.y - 5, 10, 10);
         })
