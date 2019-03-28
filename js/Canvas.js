@@ -4,16 +4,13 @@ class Canvas {
         this.canvas = canvas
         this.ctx = canvas.getContext('2d');
         this.radius = (this.canvas.height / 2) - (this.ctx.lineWidth / 2)
-        let test = new Player(300, 150, this.ctx)
         this.players = new Array()
-        this.players.push(test)
         this.addListeners()
         this.render()
     }
 
     render() {
         var rendering = () => {
-            console.log(settings.keyspressed);
             this.renderTrack()
             this.updatePlayers()
             requestAnimationFrame(rendering)
@@ -22,9 +19,10 @@ class Canvas {
     }
 
     updatePlayers() {
-        console.log(this);
-        console.log(this.players);
-        this.players.forEach(player => {
+        this.players.forEach((player, index) => {
+            if (settings.keyspressed[index + 1]) {
+                player.turn()
+            }
             player.updatePos()
             player.draw()
         })
@@ -98,5 +96,15 @@ class Canvas {
         ctx.stroke();
         ctx.fillStyle = "green";
         ctx.fill()
+    }
+
+    startGame() {
+        this.players = []
+        console.log("starting game");
+        for (let i = 0; i < this.settings.players; i++) {
+            console.log("adding player");
+            let player = new Player(300, 300 + (i * 20), this.ctx)
+            this.players.push(player)
+        }
     }
 }

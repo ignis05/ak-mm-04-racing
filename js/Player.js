@@ -2,8 +2,8 @@ class Player {
     constructor(startposX, startposY, ctx) {
         this.posX = startposX
         this.posY = startposY
-        this.velocity = 1
-        this.direction = 0
+        this.velocity = 2
+        this.direction = Math.PI / 2
         this.ctx = ctx
     }
     updatePos() {
@@ -11,7 +11,7 @@ class Player {
         this.posY += this.velocity * Math.cos(this.direction)
     }
     turn() {
-        this.direction += 0.01
+        this.direction += 0.05
     }
     draw() {
         this.ctx.fillStyle = "black"

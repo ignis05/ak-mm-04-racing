@@ -3,9 +3,15 @@ class Controls {
         this.DOMElement = DOMElement
         this.settings = settings
 
+        this.createPanel()
+
+        this.showKeybinders(1)
+        this.settings.players = 1
+    }
+    createPanel() {
         let set = document.createElement("div")
         set.id = "mainsettings"
-        DOMElement.appendChild(set)
+        this.DOMElement.appendChild(set)
 
         let label = document.createElement("label")
         label.innerText = "Players:"
@@ -35,22 +41,29 @@ class Controls {
         }
         select2.addEventListener("change", () => {
             let nr = select2.value
-            this.settings.rounds = 4
+            this.settings.rounds = nr
             console.log(`changed rounds to ${nr}`);
         })
 
         this.keybindsDiv = document.createElement("div")
         this.keybindsDiv.id = "keybinds"
-        DOMElement.appendChild(this.keybindsDiv)
+        this.DOMElement.appendChild(this.keybindsDiv)
 
         this.select.addEventListener("change", () => {
             let nr = this.select.value
-            this.settings.players = 4
+            this.settings.players = nr
             console.log(`changed players to ${nr}`);
             this.showKeybinders(nr)
         })
 
-        this.showKeybinders(1)
+        let start = document.createElement("button")
+        start.id = "btStart"
+        start.innerHTML = "START"
+        start.addEventListener("click", () => {
+            canvas.startGame()
+        })
+        set.appendChild(start)
+
     }
     showKeybinders(players) {
         this.keybindsDiv.innerHTML = ""
@@ -68,11 +81,9 @@ class Controls {
                 inp.value = this.settings.keybinds[i]
             }
             inp.addEventListener("keydown", e => {
-                console.log(e.code);
                 inp.value = e.code
                 this.settings.keybinds[i] = e.code
                 inp.blur()
-                console.log(this.settings);
             })
             cont.appendChild(inp)
         }
