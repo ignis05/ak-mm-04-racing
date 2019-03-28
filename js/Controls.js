@@ -60,7 +60,16 @@ class Controls {
         start.id = "btStart"
         start.innerHTML = "START"
         start.addEventListener("click", () => {
-            canvas.startGame()
+            let ok = true
+            for (let i = 1; i <= this.settings.players; i++){
+                if(this.settings.keybinds[i] == undefined) ok = false
+            }
+            if(ok){
+                canvas.startGame()
+            }
+            else {
+                window.alert("Not all keybinds are assigned")
+            }
         })
         set.appendChild(start)
 

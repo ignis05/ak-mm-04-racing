@@ -17,7 +17,7 @@ class Canvas {
         }
         rendering()
     }
-
+    
     updatePlayers() {
         this.players.forEach((player, index) => {
             if (settings.keyspressed[index + 1]) {
