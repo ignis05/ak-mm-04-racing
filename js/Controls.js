@@ -61,10 +61,10 @@ class Controls {
         start.innerHTML = "START"
         start.addEventListener("click", () => {
             let ok = true
-            for (let i = 1; i <= this.settings.players; i++){
-                if(this.settings.keybinds[i] == undefined) ok = false
+            for (let i = 1; i <= this.settings.players; i++) {
+                if (this.settings.keybinds[i] == undefined) ok = false
             }
-            if(ok){
+            if (ok) {
                 canvas.startGame()
             }
             else {
@@ -76,12 +76,14 @@ class Controls {
     }
     showKeybinders(players) {
         this.keybindsDiv.innerHTML = ""
+        let colors = ["#000000", "#ff0000", "#00ff00", "#0000ff"]
         for (let i = 1; i <= players; i++) {
             let cont = document.createElement("div")
             cont.classList.add("keybindCont")
             this.keybindsDiv.appendChild(cont)
 
             let label = document.createElement("div")
+            label.style.color = colors.shift()
             label.innerText = `Player ${i}:`
             cont.appendChild(label)
 
