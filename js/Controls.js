@@ -54,6 +54,7 @@ class Controls {
             this.settings.rounds = nr
             console.log(`changed rounds to ${nr}`);
         })
+        this.settings.rounds = 1
 
         let label3 = document.createElement("label")
         label3.innerText = "Speed:"

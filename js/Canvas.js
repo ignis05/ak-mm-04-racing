@@ -24,6 +24,7 @@ class Canvas {
                 player.turn()
             }
             player.updatePos()
+            player.checkRound()
             player.drawTrail()
         })
         this.players.forEach(player => {
@@ -53,6 +54,7 @@ class Canvas {
         this.renderBg()
         this.renderOuterTrack()
         this.renderInnerTrack()
+        this.renderStartLine()
     }
     renderBg() {
         let ctx = this.ctx
@@ -100,6 +102,24 @@ class Canvas {
         ctx.fillStyle = "green";
         ctx.fill()
     }
+    renderStartLine() {
+        let ctx = this.ctx
+        let canvas = this.canvas
+        ctx.beginPath()
+        ctx.moveTo(300, 270)
+        ctx.lineTo(300, 400)
+        ctx.lineWidth = 3
+        ctx.strokeStyle = "rgba(0,0,0,0.5)"
+        ctx.stroke()
+
+        // checkpoint
+        ctx.beginPath()
+        ctx.moveTo(canvas.width - 300, 0)
+        ctx.lineTo(canvas.width - 300, 135)
+        ctx.lineWidth = 3
+        ctx.strokeStyle = "rgba(0,0,0,0.5)"
+        ctx.stroke()
+    }
 
     startGame() {
         this.players = []
@@ -107,7 +127,7 @@ class Canvas {
         console.log("starting game");
         for (let i = 0; i < this.settings.players; i++) {
             console.log("adding player");
-            let player = new Player(300, 300 + (i * 20), this.ctx, colors.shift(), this.settings.speed, this.settings.turn)
+            let player = new Player(300, 300 + (i * 20), this.ctx, colors.shift(), this.settings.speed, this.settings.turn, this.settings.rounds)
             this.players.push(player)
         }
     }
