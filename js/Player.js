@@ -1,7 +1,8 @@
 class Player {
-    constructor(startposX, startposY, ctx, color, velociy, turning, rounds) {
+    constructor(startposX, startposY, ctx, color, velociy, turning, rounds, nr) {
         console.log("vel= ", velociy);
         console.log("turn= ", turning);
+        this.nr = nr
         this.posX = startposX
         this.posY = startposY
         this.velocity = velociy
@@ -13,6 +14,20 @@ class Player {
         this.rounds = rounds
         this.round = 0
         this.checkpoint = false
+        switch (nr) {
+            case 1:
+                this.image = img1
+                break;
+            case 2:
+                this.image = img2
+                break;
+            case 3:
+                this.image = img3
+                break;
+            case 4:
+                this.image = img4
+                break;
+        }
     }
     updatePos() {
         if (this.checkCollision() && this.round < this.rounds) {
@@ -28,7 +43,7 @@ class Player {
     draw() {
         // this.ctx.fillStyle = this.color
         // this.ctx.fillRect(this.posX - 5, this.posY - 5, 10, 10);
-        this.drawImage(this.ctx, img1, this.posX - 20, this.posY - 20, 40, 40, this.direction)
+        this.drawImage(this.ctx, this.image, this.posX - 20, this.posY - 20, 40, 40, this.direction)
     }
     drawTrail() {
         let trailrev = this.trail.slice(0)
