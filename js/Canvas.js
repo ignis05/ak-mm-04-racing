@@ -15,11 +15,18 @@ class Canvas {
             if (this.running) {
                 this.renderTrack()
                 this.updatePlayers()
+                let active = this.players.length
                 for (let player of this.players) {
+                    if (!player.active) active--
                     if (player.round == player.rounds) {
                         window.alert(`Player ${player.nr} wins`)
                         this.running = false
                     }
+                }
+                if (active == 1) {
+                    let winner = this.players.find(player => player.active)
+                    window.alert(`Player ${winner.nr} wins`)
+                    this.running = false
                 }
             }
             requestAnimationFrame(rendering)
@@ -126,14 +133,6 @@ class Canvas {
         ctx.lineWidth = 3
         ctx.strokeStyle = "rgba(0,0,0,0.5)"
         ctx.stroke()
-
-        // checkpoint
-        /* ctx.beginPath()
-        ctx.moveTo(canvas.width - 300, 0)
-        ctx.lineTo(canvas.width - 300, 135)
-        ctx.lineWidth = 3
-        ctx.strokeStyle = "rgba(0,0,0,0.5)"
-        ctx.stroke() */
     }
     renderCounter() {
         let ctx = this.ctx

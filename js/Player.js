@@ -14,6 +14,7 @@ class Player {
         this.rounds = rounds
         this.round = 0
         this.checkpoint = false
+        this.active = true
         switch (nr) {
             case 1:
                 this.image = img1
@@ -75,6 +76,7 @@ class Player {
             // console.log("turn");
             return true
         }
+        if (this.active) this.active = false
         return false
     }
     checkRound() {
