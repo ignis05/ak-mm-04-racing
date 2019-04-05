@@ -64,6 +64,7 @@ class Canvas {
         this.renderOuterTrack()
         this.renderInnerTrack()
         this.renderStartLine()
+        this.renderCounter()
     }
     renderBg() {
         let ctx = this.ctx
@@ -133,6 +134,26 @@ class Canvas {
         ctx.lineWidth = 3
         ctx.strokeStyle = "rgba(0,0,0,0.5)"
         ctx.stroke() */
+    }
+    renderCounter() {
+        let ctx = this.ctx
+        let canvas = this.canvas
+
+        let round
+        for (let player of this.players) {
+            if (round == undefined) {
+                round = player.rounds - player.round
+            }
+            else {
+                if (player.rounds - player.round < round) round = player.rounds - player.round
+            }
+        }
+
+        ctx.font = "50px Arial";
+        ctx.fillStyle = "red"
+        if (round) {
+            ctx.fillText(round, canvas.width / 2 - 20, canvas.height / 2 + 10);
+        }
     }
 
     startGame() {

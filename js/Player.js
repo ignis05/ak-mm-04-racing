@@ -78,7 +78,7 @@ class Player {
         return false
     }
     checkRound() {
-        console.log("check");
+        // console.log("check");
         let ctx = this.ctx
         let width = 800
 
