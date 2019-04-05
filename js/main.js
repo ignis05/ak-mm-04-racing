@@ -8,6 +8,7 @@ var img2
 var img3
 var img4
 var imgGrass
+var imgSlag
 document.addEventListener("DOMContentLoaded", async () => {
     console.log("loaded");
     img1 = new Image(40, 40);
@@ -25,8 +26,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                     imgGrass = new Image(40, 40);
                     imgGrass.src = `./img/grass.jpg`
                     imgGrass.onload = () => {
-                        var controls = new Controls(settings, document.getElementById("controls"))
-                        canvas = new Canvas(settings, document.getElementById("canvas"))
+                        imgSlag = new Image(40, 40);
+                        imgSlag.src = `./img/slag.jpg`
+                        imgSlag.onload = () => {
+                            var controls = new Controls(settings, document.getElementById("controls"))
+                            canvas = new Canvas(settings, document.getElementById("canvas"))
+                        }
                     }
                 }
             }

@@ -84,7 +84,9 @@ class Canvas {
 
         ctx.strokeStyle = "rgba(0,0,0,1)";
         ctx.stroke();
-        ctx.fillStyle = "white";
+
+        let pat = ctx.createPattern(imgSlag, "repeat");
+        ctx.fillStyle = pat;
         ctx.fill()
     }
     renderInnerTrack() {
