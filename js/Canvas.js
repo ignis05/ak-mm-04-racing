@@ -1,5 +1,6 @@
 class Canvas {
     constructor(settings, canvas) {
+        this.running = true
         this.settings = settings
         this.canvas = canvas
         this.ctx = canvas.getContext('2d');
@@ -11,8 +12,16 @@ class Canvas {
 
     render() {
         var rendering = () => {
-            this.renderTrack()
-            this.updatePlayers()
+            if (this.running) {
+                this.renderTrack()
+                this.updatePlayers()
+                for (let player of this.players) {
+                    if (player.round == player.rounds) {
+                        window.alert(`Player ${player.nr} wins`)
+                        this.running = false
+                    }
+                }
+            }
             requestAnimationFrame(rendering)
         }
         rendering()
@@ -127,6 +136,7 @@ class Canvas {
     }
 
     startGame() {
+        this.running = true
         this.players = []
         let colors = ["#000000", "#ff0000", "#00ff00", "#0000ff"]
         console.log("starting game");
