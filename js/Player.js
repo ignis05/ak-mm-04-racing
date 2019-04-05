@@ -1,7 +1,7 @@
 class Player {
     constructor(startposX, startposY, ctx, color, velociy, turning, rounds, nr) {
-        console.log("vel= ", velociy);
-        console.log("turn= ", turning);
+        // console.log("vel= ", velociy);
+        // console.log("turn= ", turning);
         this.nr = nr
         this.posX = startposX
         this.posY = startposY
