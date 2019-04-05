@@ -67,7 +67,8 @@ class Canvas {
         ctx.lineTo(0, canvas.height)
         ctx.closePath()
 
-        ctx.fillStyle = "green";
+        let pat = ctx.createPattern(imgGrass, "repeat");
+        ctx.fillStyle = pat;
         ctx.fill()
     }
     renderOuterTrack() {
@@ -99,7 +100,9 @@ class Canvas {
 
         ctx.strokeStyle = "rgba(0,0,0,1)";
         ctx.stroke();
-        ctx.fillStyle = "green";
+
+        let pat = ctx.createPattern(imgGrass, "repeat");
+        ctx.fillStyle = pat;
         ctx.fill()
     }
     renderStartLine() {
